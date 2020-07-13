@@ -1,0 +1,48 @@
+"""
+Tasks:
+- Keep track of cards in hand
+- Keep track of all cards played (suite/value/g or b)
+- Keep track of number of cards each player has in order to keep track of score
+- Create simple task to play
+"""
+
+prophet_points = 0
+player = None
+p1, p2, p3, p4 = 0, 0, 0, 0
+def reset_prophet():
+    prophet_points, player = 0, None
+
+def set_prophet(prophet):
+    player = prophet
+
+#def other_points(player):
+#    return otherPlayer_points[player - 1][0]
+def post_turn():
+    otherPlayer_points(1), other_points(2), other_points(3), other_points(4) = turn_points()
+    prophet_points = 
+    
+
+
+
+def calculate_prophet_points():
+
+def turn_points():
+    most = max()
+    return most - p1, most - p2, most - p3, most - p4
+
+
+def calculate_points(most, yourCards):
+    points = most - yourCards
+    if (yourCards == 0):
+        points+= 4
+    return points
+
+
+cards_played = []
+#cards_played.append([suite, value, good/bad (boolean)])
+#suites = heart, club, diamonds, spades
+cards_hand = []
+otherPlayer_points = []
+otherPlayer_cards = []
+
+#format of cards played
