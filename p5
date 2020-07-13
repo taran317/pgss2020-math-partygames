@@ -15,20 +15,18 @@ def reset_prophet():
 def set_prophet(prophet):
     player = prophet
 
-#def other_points(player):
-#    return otherPlayer_points[player - 1][0]
-def post_turn():
-    otherPlayer_points(1), other_points(2), other_points(3), other_points(4) = turn_points()
-    prophet_points = 
-    
-
-
-
-def calculate_prophet_points():
-
 def turn_points():
-    most = max()
-    return most - p1, most - p2, most - p3, most - p4
+    mostCards = max(otherPlayer_cards)
+    return mostCards - otherPlayer_cards[0], mostCards - otherPlayer_cards[1], mostCards - otherPlayer_cards[2], mostCards - otherPlayer_cards[3]
+
+def post_turn(prophet_decision): """ This function is called after each turn and it sets the updated # of points for each player. prophet_decision = 1 if prophet made the RIGHT decision and player played the RIGHT card, 2 if prophet made the RIGHT decision and player played the WRONG card, 3 if prophet made the WRONG decision"""
+    otherPlayer_points[0], otherPlayer_points[1], otherPlayer_points[2], otherPlayer_points[3] = turn_points()
+    prophet_points += prophet_decision
+    if(prophet_decision == 3):
+        otherPlayer_points[player - 1] -= prophet_points
+        reset_prophet()
+    else:
+        otherPlayer_points[player - 1] += prophet_decision
 
 
 def calculate_points(most, yourCards):
