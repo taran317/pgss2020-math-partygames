@@ -8,39 +8,60 @@ Tasks:
 
 prophet_points = 0
 player = None
-p1, p2, p3, p4 = 0, 0, 0, 0
+
 def reset_prophet():
+    global prophet_points
     prophet_points, player = 0, None
 
 def set_prophet(prophet):
+    global player
     player = prophet
 
 def turn_points():
     mostCards = max(otherPlayer_cards)
-    return mostCards - otherPlayer_cards[0], mostCards - otherPlayer_cards[1], mostCards - otherPlayer_cards[2], mostCards - otherPlayer_cards[3]
+    return [mostCards - otherPlayer_cards[0], mostCards - otherPlayer_cards[1], mostCards - otherPlayer_cards[2], mostCards - otherPlayer_cards[3]]
 
-def post_turn(prophet_decision): """ This function is called after each turn and it sets the updated # of points for each player. prophet_decision = 1 if prophet made the RIGHT decision and player played the RIGHT card, 2 if prophet made the RIGHT decision and player played the WRONG card, 3 if prophet made the WRONG decision"""
-    otherPlayer_points[0], otherPlayer_points[1], otherPlayer_points[2], otherPlayer_points[3] = turn_points()
-    prophet_points += prophet_decision
+def post_turn(prophet_decision=3): 
+    """ This function is called after each turn and it sets the updated # of points for each player. prophet_decision = 1 if prophet made the RIGHT decision and player played the RIGHT card, 2 if prophet made the RIGHT decision and player played the WRONG card, 3 if prophet made the WRONG decision"""
+    global otherPlayer_points
+    otherPlayer_points = turn_points()
+    otherPlayer_points[player - 1] += prophet_points
+    print(otherPlayer_points)
+
+    global prophet_points
+    
     if(prophet_decision == 3):
         otherPlayer_points[player - 1] -= prophet_points
         reset_prophet()
     else:
+        prophet_points += prophet_decision
         otherPlayer_points[player - 1] += prophet_decision
-
 
 def calculate_points(most, yourCards):
     points = most - yourCards
     if (yourCards == 0):
-        points+= 4
+        points += 4
     return points
 
 
 cards_played = []
 #cards_played.append([suite, value, good/bad (boolean)])
 #suites = heart, club, diamonds, spades
+
 cards_hand = []
-otherPlayer_points = []
-otherPlayer_cards = []
+otherPlayer_points = [0,0,0,0]
+otherPlayer_cards = [14, 9, 8, 7]
+#test data
+print(otherPlayer_cards)
+
+
+
+set_prophet(1)
+print(player)
+
+post_turn(2)
+post_turn(1)
+print(otherPlayer_points)
+
 
 #format of cards played
