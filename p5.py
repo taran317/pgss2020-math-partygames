@@ -99,3 +99,16 @@ print(other_player_points)
 """
 
 #format of cards played
+
+
+## This is an example of using imports
+
+import PGSS
+from PGSS import utils
+from PGSS.utils import Mathy
+
+
+print(Mathy.addTwo(5,5))
+my_math = Mathy()
+my_math.storeNumber(7)
+print(my_math.addToSelf(10))
