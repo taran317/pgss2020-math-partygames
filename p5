@@ -65,9 +65,7 @@ def calculate_cards(correct_play, cards, player): # delete parameters later if a
     global other_player_cards
     other_player_cards[player-1] += penalties(correct_play, cards) # ask server how many cards played
 
-def determine_play:
-    
-
+#def determine_play:
 
 
 cards_played = []
@@ -81,18 +79,15 @@ other_player_cards = [14, 14, 14, 14]
 
 print(other_player_cards)
 
-"""
 calculate_cards(False, 4, 2)
-print(other_player_cards)
+
 other_player_points = turn_points()
-"""
+
+set_prophet(3)
+
+post_turn(1)
 print(other_player_points)
 
-set_prophet(2)
-print(prophet_player)
-
-post_turn(2)
-print(other_player_points)
 """
 post_turn(1)
 post_turn(3)
