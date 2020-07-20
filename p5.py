@@ -8,26 +8,27 @@ Tasks:
 - Crate a function to determine the confidence score.
 """
 
+print("hello")
+
+"""
 import PGSS
 from PGSS import utils
 from PGSS.utils import Mathy
 
-from PGSS.utils import Game
 
 from PGSS import player
 from PGSS.player import Player
-player1 = Player()
-player2 = Player()
+
+from PGSS import game
+from PGSS.game import Game
 
 
-
-
-
-"""Example"
 print(Mathy.addTwo(5,5))
 my_math = Mathy()
 my_math.storeNumber(7)
 print(my_math.addToSelf(10))
+
+"""
 """
 
 
@@ -36,7 +37,7 @@ prophet_player = None
 
 
 
-
+    
 #def determine_play:
 
 
@@ -61,6 +62,7 @@ post_turn(1)
 print(other_player_points)
 
 """
+"""
 post_turn(1)
 post_turn(3)
 
@@ -69,6 +71,7 @@ post_turn(2)
 
 print(other_player_points)
 """
+"""
 
 #format of cards played
 
@@ -76,4 +79,103 @@ print(other_player_points)
 ## This is an example of using imports
 
 
+"""
+"""
 
+#format of cards played
+
+
+## This is an example of using imports
+
+
+"""
+"""
+
+#format of cards played
+
+
+## This is an example of using imports
+
+
+"""
+"""
+
+#format of cards played
+
+
+## This is an example of using imports
+
+
+"""
+"""
+
+#format of cards played
+
+
+## This is an example of using imports
+
+
+"""
+"""
+
+#format of cards played
+
+
+## This is an example of using imports
+
+
+"""
+"""
+
+#format of cards played
+
+
+## This is an example of using imports
+
+
+"""
+"""
+
+#format of cards played
+
+
+## This is an example of using imports
+
+
+"""
+"""
+
+#format of cards played
+
+
+## This is an example of using imports
+
+
+"""
+"""
+
+#format of cards played
+
+
+## This is an example of using imports
+
+
+"""
+"""
+
+#format of cards played
+
+
+## This is an example of using imports
+
+
+"""
+"""
+
+#format of cards played
+
+
+## This is an example of using imports
+
+
+"""

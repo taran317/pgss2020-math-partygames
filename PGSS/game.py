@@ -1,20 +1,22 @@
 from PGSS.player import player
 
 class Game():
-    def start_game():
-        player1 = 
-    def calculate_points(most, your_cards):
-        points = most - your_cards
-        if (your_cards == 0):
-            points += 4
-        return points
+    prophet = None
+    prophet_decision = 3
+    current_board = { }
 
-    def calculate_cards(correct_play, cards, player): # delete parameters later if accessible from server directly
-        # make new_cards negative to ensure it works
-        # new_cards = represents cards discarded or penalty
-        global other_player_cards
-        other_player_cards[player-1] += penalties(correct_play, cards) # ask server how many cards played
+    def update_current_board(new_cards): #Gets the new cards from the server and upates them to the board
+        self.current_board =+ new_cards
+    
+    def set_prophet(self,prophet):
+        self.prophet = prophet
 
+    def __init__(self):
+        player1 = Player()
+        player2 = Player()
+        player3 = Player()
+        player4 = Player() 
+    
     def penalties(correct_play, cards): # ask server if correct play, delete parameters later if accessible from server directly
         if(correct_play):
             return -1 * cards
@@ -25,21 +27,21 @@ class Game():
         """ This function is called after each turn and it sets the updated # of points for each player. 
         prophet_decision = 1 if prophet made the RIGHT decision and player played the RIGHT card, 
         2 if prophet made the RIGHT decision and player played the WRONG card, 3 if prophet made the WRONG decision"""
-        global other_player_points
-        global prophet_points
-        global prophet_player
+        #global other_player_points
+        #global prophet_points
+        #global prophet_player
     
         other_player_points = turn_points()
-        if prophet_player is None:
-            print("PROPHET PLAYER NONE")
-            return
+        if self.prophet is None:
+            break
 
-        other_player_points[prophet_player - 1] += prophet_points
+        #access the the points of whatever player is prophet
+        self.prophet += prophet_points
         print(other_player_points)
 
         if(prophet_decision == 3):
-            other_player_points[prophet_player - 1] -= prophet_points
+            self.prophet -= prophet_points
             reset_prophet()
         else:
             prophet_points += prophet_decision
-            other_player_points[prophet_player - 1] += prophet_decision
+            #other_player_points[prophet_player - 1] += prophet_decision
