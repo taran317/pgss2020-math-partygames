@@ -8,6 +8,13 @@ Tasks:
 - Crate a function to determine the confidence score.
 """
 
+<<<<<<< HEAD
+
+import PGSS
+from PGSS import utils
+from PGSS.utils import Mathy
+=======
+>>>>>>> 66d95f171b83c5512b2226cd854941a4ff38e092
 
 
 
@@ -20,12 +27,15 @@ player = Player()
 #print(get_cards)
 
 
+<<<<<<< HEAD
+=======
 """
 
 from PGSS import game
 from PGSS.game import Game
 """
 
+>>>>>>> 66d95f171b83c5512b2226cd854941a4ff38e092
 
 """
 
@@ -68,6 +78,24 @@ set_prophet(2)
 post_turn(2)
 
 print(other_player_points)
+"""
+"""
+
+#format of cards played
+
+
+## This is an example of using imports
+
+
+"""
+"""
+
+#format of cards played
+
+
+## This is an example of using imports
+
+
 """
 """
 

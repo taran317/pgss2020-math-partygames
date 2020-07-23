@@ -5,6 +5,5 @@ class Bot():
         confidence_score = calculate_confidence():
 
     def calculate_confidence(Game.current_board):
-        
 
 
