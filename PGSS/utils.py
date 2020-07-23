@@ -20,4 +20,3 @@ class Mathy():
     def addToSelf(self,another_num):
         return self.num + another_num      
 
-class Bot():

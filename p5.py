@@ -8,24 +8,34 @@ Tasks:
 - Crate a function to determine the confidence score.
 """
 
+<<<<<<< HEAD
 
 import PGSS
 from PGSS import utils
 from PGSS.utils import Mathy
+=======
+>>>>>>> 66d95f171b83c5512b2226cd854941a4ff38e092
 
 
-from PGSS import player
-from PGSS.player import Player
 
 from PGSS import game
 from PGSS.game import Game
+from PGSS.game import Player
+
+game = Game()
+player = Player()
+#print(get_cards)
 
 
-print(Mathy.addTwo(5,5))
-my_math = Mathy()
-my_math.storeNumber(7)
-print(my_math.addToSelf(10))
+<<<<<<< HEAD
+=======
+"""
 
+from PGSS import game
+from PGSS.game import Game
+"""
+
+>>>>>>> 66d95f171b83c5512b2226cd854941a4ff38e092
 
 """
 
