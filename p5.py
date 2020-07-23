@@ -9,14 +9,15 @@ Tasks:
 """
 
 
-from PGSS import player
-from PGSS.player import Player
+
 
 from PGSS import game
 from PGSS.game import Game
+from PGSS.game import Player
 
 game = Game()
 player = Player()
+#print(get_cards)
 
 
 """

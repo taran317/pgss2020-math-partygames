@@ -1,4 +1,5 @@
-from PGSS.game import game
+import game
+
 class Player():
     # def set_prophet(prophet):
     #     global prophet_player
@@ -8,13 +9,15 @@ class Player():
     #     prophet_points, prophet_player = 0, None
     points = 0
     cards = 14
-    
-    def update_prophet():
-        prophet = game.prophet
 
     def __init__(self, points=0, cards=14):
         self.points = points
         self.cards = cards
+
+    def update_prophet():
+        prophet = game.prophet
+
+
 
     def get_cards():
         return(self.cards)
