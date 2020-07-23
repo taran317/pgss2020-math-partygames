@@ -1,4 +1,4 @@
-import game
+#DEFUNCT DO NOT USE
 
 class Player():
     # def set_prophet(prophet):

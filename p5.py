@@ -11,9 +11,9 @@ Tasks:
 
 
 
-from PGSS import game
-from PGSS.game import Game
-from PGSS.game import Player
+from PGSS import function
+from PGSS.function import Game
+from PGSS.function import Player
 
 game = Game()
 player = Player()
