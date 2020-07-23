@@ -8,6 +8,7 @@ class Player():
     #     prophet_points, prophet_player = 0, None
     points = 0
     cards = 14
+    
     def update_prophet():
         prophet = game.prophet
 
