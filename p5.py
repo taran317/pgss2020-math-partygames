@@ -8,9 +8,7 @@ Tasks:
 - Crate a function to determine the confidence score.
 """
 
-print("hello")
 
-"""
 import PGSS
 from PGSS import utils
 from PGSS.utils import Mathy
@@ -28,7 +26,7 @@ my_math = Mathy()
 my_math.storeNumber(7)
 print(my_math.addToSelf(10))
 
-"""
+
 """
 
 
@@ -70,6 +68,24 @@ set_prophet(2)
 post_turn(2)
 
 print(other_player_points)
+"""
+"""
+
+#format of cards played
+
+
+## This is an example of using imports
+
+
+"""
+"""
+
+#format of cards played
+
+
+## This is an example of using imports
+
+
 """
 """
 
