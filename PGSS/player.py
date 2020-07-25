@@ -1,4 +1,9 @@
+<<<<<<< HEAD
+from game import player
+bot_cards = player.cards
+=======
 #DEFUNCT DO NOT USE
+>>>>>>> 28f0fbc178dabdf3d9249064288d44cb043b1915
 
 class Player():
     # def set_prophet(prophet):
@@ -17,13 +22,13 @@ class Player():
     def update_prophet():
         prophet = game.prophet
 
-
-
-    def get_cards():
+    def get_cards(self):
         return(self.cards)
-    def get_points():
+
+    def get_points(self):
         return(self.points)
-    def turn_points():
+        
+    def turn_points(self):
         most_cards = max(other_player_cards)
         return (most_cards - self.cards)
 
