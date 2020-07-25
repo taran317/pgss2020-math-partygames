@@ -2,20 +2,60 @@ class Game():
     prophet = None
     prophet_decision = 3
     current_board = { }
-    player1 = ""
-    list_of_players = []
+    prophet_points = 0
+   
+    #list_of_players = []
+    
    
 
     def __init__(self):
+      
         player1 = Player()
         player2 = Player()
         player3 = Player()
         player4 = Player() 
-        
-        list_of_players.append(player1)
+        self.list_of_players = [player1,player2,player3,player4]
+
+        """
+        self.list_of_players.append(player1)
+        self.list_of_players.append(player2)
+        self.list_of_players.append(player3)
+        self.list_of_players.append(player4)
+        """
+
         
 
-        self.post_turn()
+        
+        print(player1.get_cards())
+      
+  
+        print("POINTS")
+        self.post_turn(player2, 1,4,2)
+
+        print("player1" + str(player1.get_points()))
+        
+        self.set_prophet(player2)
+        print("prophet" + str(player2.get_points()))
+        self.post_turn(player1, 1,4,2)
+        print("player1" + str(player1.get_points()))
+
+        print("prophet" + str(player2.get_points()))
+
+        self.post_turn(player1, 1,4,2)
+
+        print("player1" + str(player1.get_points()))
+
+        print("prophet" + str(player2.get_points()))
+
+        self.post_turn(player1, 1,4,3)
+
+        print("player1" + str(player1.get_points()))
+
+        print("prophet" + str(player2.get_points()))
+
+       
+
+
   
         
 
@@ -25,7 +65,7 @@ class Game():
     def set_prophet(self,new_prophet):
         self.prophet = new_prophet
     
-    def post_turn(self, prophet_decision = 3):
+    def post_turn(self, player, valid, num_cards, prophet_decision = 3):
        #send information to bot class to analyze 
         
         # This function is called after each turn and it sets the updated # of points for each player. 
@@ -34,32 +74,29 @@ class Game():
         #global other_player_points
         #global prophet_points
         #global prophet_player
- 
-        
-        list_of_players[0].turn_points(most_cards())
-        #self.player2.turn_points(most_cards())
-        #self.player3.turn_points(most_cards())
-        #self.player4.turn_points(most_cards())
+            
 
-
-        if self.prophet is None:
-            return
-
-        #access the the points of whatever player is prophet
-        self.prophet += prophet_points
       
-        if(prophet_decision == 3):
-            self.prophet -= prophet_points
-            reset_prophet()
-        else:
-            prophet_points += prophet_decision
-            #other_player_points[prophet_player - 1] += prophet_decision
-
+        player.calculate_cards(valid,num_cards)
+        for player in self.list_of_players:
+            player.turn_points(self.most_cards())
+       
+       #prophet points would clear if run after each turn?
+        if self.prophet is not None:
+            if(prophet_decision == 3):
+                self.prophet_points = 0
+                self.prophet = None
+            else:
+                self.prophet_points += prophet_decision
+                self.prophet.add_points_to_prophet(self.prophet_points)
+                
+        
+            
 
 
         
-    def most_cards():
-        return max(player1.get_cards(), player2.get_cards(), player3.get_cards(), player4.get_cards())
+    def most_cards(self):
+        return max(self.list_of_players[0].get_cards(), self.list_of_players[1].get_cards(), self.list_of_players[2].get_cards(), self.list_of_players[3].get_cards())
 
 
 class Player():
@@ -74,9 +111,23 @@ class Player():
     def __init__(self):
         self.points = 0
         self.cards = 14
+        self.list_of_good_cards = []
+        self.list_of_bad_cards = []
 
-    def update_prophet():
+    def turn(self, card, valid): # allow multiple cards
+        if(valid):
+            self.list_of_good_cards.append(card)
+        else:
+            self.list_of_bad_cards.append(card)
+
+
+
+    def update_prophet(self):
         prophet = game.prophet
+
+    def add_points_to_prophet(self,more_points):
+        self.points += more_points
+
 
     def get_cards(self):
         return(self.cards)
@@ -84,11 +135,12 @@ class Player():
     def get_points(self):
         return(self.points)
 
-    def turn_points(most):
+    def turn_points(self, most):
         #Remember to add 4 points to whoever has 0 cards at the end of the game
         self.points =  (most - self.cards)
     
     def calculate_cards(self, correct_play, cards_played): # ask server if correct play, delete parameters later if accessible from server directly
+        new_cards = 0
         if(correct_play):
              new_cards =  -1 * cards_played
         self.cards += new_cards
