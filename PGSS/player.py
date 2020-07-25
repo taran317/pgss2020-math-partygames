@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 from game import player
 bot_cards = player.cards
+=======
+#DEFUNCT DO NOT USE
+>>>>>>> 28f0fbc178dabdf3d9249064288d44cb043b1915
 
 class Player():
     # def set_prophet(prophet):
