@@ -8,28 +8,17 @@ Tasks:
 - Crate a function to determine the confidence score.
 """
 
-<<<<<<< HEAD
-from PGSS import game
-from PGSS.game import Game
-from PGSS.game import Player
-=======
-<<<<<<< HEAD
-
-import PGSS
-from PGSS import utils
-from PGSS.utils import Mathy
-=======
->>>>>>> 66d95f171b83c5512b2226cd854941a4ff38e092
-
-
 
 from PGSS import game_player
 from PGSS.game_player import Game
 from PGSS.game_player import Player
->>>>>>> 28f0fbc178dabdf3d9249064288d44cb043b1915
 
 game = Game()
 player = Player()
+
+#def turn(player,card,decision):
+
+
 
 
 
