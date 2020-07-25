@@ -24,15 +24,14 @@ class Game():
 
         
         print(player1.get_cards())
-        print(player1.get_points)
-        player1.calculate_cards(1,4)
-        print()
+      
   
         print("POINTS")
         print(player1.get_points())
         
         
-        self.post_turn()
+        self.post_turn(player1, 1,4,3)
+
         print(player1.get_points())
   
         
@@ -43,7 +42,7 @@ class Game():
     def set_prophet(self,new_prophet):
         self.prophet = new_prophet
     
-    def post_turn(self, prophet_decision = 3):
+    def post_turn(self, player, valid, num_cards, prophet_decision = 3):
        #send information to bot class to analyze 
         
         # This function is called after each turn and it sets the updated # of points for each player. 
@@ -53,13 +52,11 @@ class Game():
         #global prophet_points
         #global prophet_player
  
+        player.calculate_cards(valid,num_cards)
         
         for player in self.list_of_players:
             player.turn_points(self.most_cards())
             #print(player.get_points())
-        
-
-
 
         if self.prophet is None:
             return
@@ -93,6 +90,14 @@ class Player():
     def __init__(self):
         self.points = 0
         self.cards = 14
+        self.list_of_good_cards = []
+        self.list_of_bad_cards = []
+
+    def turn(self, card, valid): # allow multiple cards
+        if(valid):
+            self.list_of_good_cards.append(card)
+        else:
+            self.list_of_bad_cards.append(card)
 
     def update_prophet():
         prophet = game.prophet
