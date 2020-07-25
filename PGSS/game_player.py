@@ -2,20 +2,38 @@ class Game():
     prophet = None
     prophet_decision = 3
     current_board = { }
-    player1 = ""
+   
     list_of_players = []
+    
    
 
     def __init__(self):
+      
         player1 = Player()
         player2 = Player()
         player3 = Player()
         player4 = Player() 
+
         
-        list_of_players.append(player1)
+        self.list_of_players.append(player1)
+        self.list_of_players.append(player2)
+        self.list_of_players.append(player3)
+        self.list_of_players.append(player4)
+
         
 
+        
+        print(player1.get_cards())
+        print(player1.get_points)
+        player1.calculate_cards(1,4)
+        print()
+  
+        print("POINTS")
+        print(player1.get_points())
+        
+        
         self.post_turn()
+        print(player1.get_points())
   
         
 
@@ -36,10 +54,11 @@ class Game():
         #global prophet_player
  
         
-        list_of_players[0].turn_points(most_cards())
-        #self.player2.turn_points(most_cards())
-        #self.player3.turn_points(most_cards())
-        #self.player4.turn_points(most_cards())
+        for player in self.list_of_players:
+            player.turn_points(self.most_cards())
+            #print(player.get_points())
+        
+
 
 
         if self.prophet is None:
@@ -58,8 +77,8 @@ class Game():
 
 
         
-    def most_cards():
-        return max(player1.get_cards(), player2.get_cards(), player3.get_cards(), player4.get_cards())
+    def most_cards(self):
+        return max(self.list_of_players[0].get_cards(), self.list_of_players[1].get_cards(), self.list_of_players[2].get_cards(), self.list_of_players[3].get_cards())
 
 
 class Player():
@@ -84,7 +103,7 @@ class Player():
     def get_points(self):
         return(self.points)
 
-    def turn_points(most):
+    def turn_points(self, most):
         #Remember to add 4 points to whoever has 0 cards at the end of the game
         self.points =  (most - self.cards)
     
