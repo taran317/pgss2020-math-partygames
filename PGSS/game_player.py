@@ -1,7 +1,7 @@
 
 class Game():
     prophet = None
-    prophet_decision = 3
+    prophet_decision =   3
     current_board = { }
 
     def __init__(self):
@@ -10,6 +10,8 @@ class Game():
         player3 = Player()
         player4 = Player() 
         player1.get_cards()
+        player1.get_cards()
+        player1.get_points()
 
     def update_current_board(new_cards): #Gets the new cards from the server and upates them to the board
         self.current_board += new_cards
@@ -73,10 +75,12 @@ class Player():
 
 
 
-    def get_cards():
+    def get_cards(self):
         return(self.cards)
-    def get_points():
+
+    def get_points(self):
         return(self.points)
+
     def turn_points():
         most_cards = max(other_player_cards)
         return (most_cards - self.cards)
