@@ -3,7 +3,7 @@ class Game():
     prophet_decision = 3
     current_board = { }
    
-    list_of_players = []
+    #list_of_players = []
     
    
 
@@ -13,12 +13,14 @@ class Game():
         player2 = Player()
         player3 = Player()
         player4 = Player() 
+        self.list_of_players = [player1,player2,player3,player4]
 
-        
+        """
         self.list_of_players.append(player1)
         self.list_of_players.append(player2)
         self.list_of_players.append(player3)
         self.list_of_players.append(player4)
+        """
 
         
 
@@ -33,6 +35,7 @@ class Game():
         self.post_turn(player1, 1,4,3)
 
         print(player1.get_points())
+        #set_prophet(player2)
   
         
 
@@ -51,14 +54,12 @@ class Game():
         #global other_player_points
         #global prophet_points
         #global prophet_player
- 
-        player.calculate_cards(valid,num_cards)
-        
-        for player in self.list_of_players:
-            player.turn_points(self.most_cards())
-            #print(player.get_points())
+            
 
         if self.prophet is None:
+            player.calculate_cards(valid,num_cards)
+            for player in self.list_of_players:
+                player.turn_points(self.most_cards())
             return
 
         #access the the points of whatever player is prophet
@@ -70,6 +71,9 @@ class Game():
         else:
             prophet_points += prophet_decision
             #other_player_points[prophet_player - 1] += prophet_decision
+
+        for player in self.list_of_players:
+            player.turn_points(self.most_cards())
 
 
 
