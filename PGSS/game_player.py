@@ -1,6 +1,6 @@
 class Game():
     prophet = None
-    prophet_decision = 3
+    prophet_decision =   3
     current_board = { }
 
     def __init__(self):
@@ -8,6 +8,7 @@ class Game():
         player2 = Player()
         player3 = Player()
         player4 = Player() 
+<<<<<<< HEAD
         
         print(player1.get_cards())
         print(player1.get_points)
@@ -17,6 +18,11 @@ class Game():
         post_turn()
         print(player1.get_points)
         
+=======
+        player1.get_cards()
+        player1.get_cards()
+        player1.get_points()
+>>>>>>> 43dbe68e3feff4a203e420570836a67cc3ab7f43
 
     def update_current_board(new_cards): #Gets the new cards from the server and upates them to the board
         self.current_board += new_cards
@@ -76,6 +82,9 @@ class Player():
     def update_prophet():
         prophet = game.prophet
 
+
+
+   
     def get_cards(self):
         return(self.cards)
         
