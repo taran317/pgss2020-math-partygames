@@ -15,21 +15,27 @@ class Bot():
         self.good_cards = [(11,0),(11,1),(11,2),(11,3)]
         self.bad_cards = [(1,0),(2,0),(3,0),(4,0),(5,0),(6,1),(7,2),(8,3),(9,4),(10,5),(12,6)]
         self.bot_cards = [(2,0),(10,0),(3,0)]
-        # self.good_cards = [[11,0)],[11,1],[11,2],[11,3]]
-        # self.bad_cards = [[1,0],[2,0],[3,0],[4,0],[5,0],[6,1],[7,2],[8,3],[9,4],[10,5],[12,6]]
-        # self.bot_cards = [[11,0],[2,0],[3,0]]
-        # self.good_cards = Game.good_cards()
+
+        # print(good_cards())
         self.similarity_index = []
-        print(self.bot_turn())
-        bot_cards = []
-        
         
 
-    #REmember to differentiate between face cards (J = 11, Q =12, K =13, A = 14)
+    # def get_good_cards(self,game):
+    #     return game.good_cards
+    
+    # def get_bad_cards(self,game):
+    #     return game.bad_cards
+    
+    def update_cards(self,game):
+        self.good_cards = game.good_cards
+        self.bad_cards = game.bad_cards
+
+    #Remember to differentiate between face cards (J = 11, Q =12, K =13, A = 14)
     def determine_bot_cards(cards):
         self.bot_cards = cards
         
-    def bot_turn(self):
+    def bot_turn(self,game):
+        self.update_cards(game)
         self.get_similarity_all()
         # Returns the first card that has been played  if there has been one or finds the best card if there is none
         if 'pc' in self.similarity_index:
@@ -48,16 +54,24 @@ class Bot():
 
     def get_similarity_all(self): # game.good_cards, game.bad_cards
         for card in self.bot_cards:
-            sim_good = self.get_list_similarity(card, game.good_cards) # remember to change self to game.good_cards
-            sim_bad = self.get_list_similarity(card, game.bad_cards) # remember to change self to game.bad_cards
-
+            if(len(self.good_cards))==0:
+                sim_good = 0
+            else:
+                sim_good = self.get_list_similarity(card, self.good_cards) # remember to change self to game.good_cards
+            if(len(self.bad_cards))==0:
+                sim_bad = 0
+            else:
+                 sim_bad = self.get_list_similarity(card, self.bad_cards) # remember to change self to game.bad_cards
             self.similarity_index.append(sim_good - sim_bad)
+            
     
     def get_list_similarity(self, player_card, card_list):
         total = 0
         for index_card in card_list:
             total += self.get_similarity(player_card, index_card)
-        return total/len(card_list)
+        if (len(card_list)>0):
+            return total/len(card_list)
+       
     
     def get_similarity(self, card_1, card_2):
         number = 0

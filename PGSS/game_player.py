@@ -25,6 +25,11 @@ class Game():
             i += 1
         output += 'Good Cards: ' + str(self.good_cards) + '\nBad Cards: ' + str(self.bad_cards)
         return(output)
+    
+    def good_cards(self):
+        return self.good_cards
+    def bad_cards(self):
+        return self.bad_cards
 
     def update_current_board(self,new_cards): #Gets the new cards from the server and upates them to the board
         self.current_board += new_cards
@@ -37,7 +42,7 @@ class Game():
                 self.good_cards.extend(card)
             else:
                 self.bad_cards.extend(card)
-            self.post_turn(player, valid, len(card[-1]))
+            self.post_turn(player, valid, len(card))
 
 
     def post_turn(self, player, valid, num_cards, prophet_decision = 3):
