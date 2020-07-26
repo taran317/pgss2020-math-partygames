@@ -39,8 +39,8 @@ class Bot():
             similarities = self.get_list_similarities(self, card, good_cards)
             differences = self.get_list_similarities(self, card, bad_cards)
             self.similarity_index.append(similarities - differences)
-    def get_list_similarity(self, player_card, list):
-        for index_card in list:
+    def get_list_similarity(self, player_card, list1):
+        for index_card in list1:
             return self.get_similarity(self, player_card, index_card)
     def get_similarity(self, card_1, card_2):
         number = 0
@@ -62,7 +62,7 @@ class Bot():
         highest_similarity_number = None
         highest_similarity_card = None
         for number in self.similarity_index:
-            if number >> highest_similarity_number:
+            if number > highest_similarity_number:
                 highest_similarity_number = number
                 highest_similarity_card = self.bot_cards(number)
         return highest_similarity_card
