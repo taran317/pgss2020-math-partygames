@@ -1,5 +1,6 @@
 from game_player import Game
 from game_player import Player
+import random
 class Bot():
     #create a list for similarities and one for differences
     #three levels: one card in hand, list of good cards and list of bad cards
@@ -31,16 +32,40 @@ class Bot():
         # else:
         #     return play_cards(bot_cards, current_cards, 1)
         self.get_similarity_all(self, bot_cards, good_cards, bad_cards)
-        best_card = self.determine_highest_similarity(self)
-        return best_card
+        # Returns the first card that has been played  if there has been one or finds the best card if there is none
+        if 'pc' in similarity_index:
+            return similarity_index['pc']
+        # Checks to see if you have no cards that are similar cards to the correct cards
+        elif all(x <= 0 for x in similarity_index):
+            return 'no_similar_cards'
+        # Checks for if all the similarity indexes are the same
+        elif same_similarity_index(self) == 'True':
+            # Chooses a random card to play
+            card_choice = randint(1, similarity_index.len())
+            return bot_cards[card_choice]
+        else:
+            best_card = self.determine_highest_similarity(self)
+            return best_card
 
     def get_similarity_all(self, bot_cards, good_cards, bad_cards):
         for card in bot_cards:
             similarities = self.get_list_similarities(self, card, good_cards)
             differences = self.get_list_similarities(self, card, bad_cards)
+<<<<<<< HEAD
             self.similarity_index.append(similarities - differences)
     def get_list_similarity(self, player_card, list1):
         for index_card in list1:
+=======
+            # Determines if the card is one that has already been played.
+            if similarities == 6 & differences == 0:
+                # Assignes pc (standing for played card) if the cars was already played
+                self.similarity_index.append('pc')
+            else:
+                # Calculates the similarity index if not
+                self.similarity_index.append(similarities - differences)
+    def get_list_similarity(self, player_card, list):
+        for index_card in list:
+>>>>>>> 2dc017261cb423e2325d0dcaa3d20f5143873075
             return self.get_similarity(self, player_card, index_card)
     def get_similarity(self, card_1, card_2):
         number = 0
@@ -66,6 +91,17 @@ class Bot():
                 highest_similarity_number = number
                 highest_similarity_card = self.bot_cards(number)
         return highest_similarity_card
+    def same_similarity_index(self):
+        # Takes the first number to compare to
+        reference_number = similarity_index
+        # Checks for a number that is different
+        for number in similarity_index():
+            if number != reference_number():
+                # If there is a different similarity index
+                return False
+                break
+        # If all similarity indexes are the same
+        return True
     
     # def correct_cards():
     #     for number in self.similarity_index():

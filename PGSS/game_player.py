@@ -78,6 +78,15 @@ class Player():
     def __init__(self):
         self.points = 0
         self.cards = 14
+        self.list_of_good_cards = []
+        self.list_of_bad_cards = []
+
+    def turn(self, card, valid): # allow multiple cards
+        if(valid):
+            self.list_of_good_cards.append(card)
+        else:
+            self.list_of_bad_cards.append(card)
+
 
     def update_prophet(self):
         prophet = game.prophet
