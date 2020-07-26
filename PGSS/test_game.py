@@ -1,5 +1,6 @@
 from game_player import Game
 from game_player import Player
+from bot import Bot
 
 # Things to Include in our Test Game
 # People playing cards correctly
@@ -11,15 +12,20 @@ from game_player import Player
 
 game = Game()
 player = Player()
+bot = Bot()
 
-game.turn([(5,2)],True)
-game.post_turn(game.players[0], True,1,3)
-
-game.turn([(11,3),(2,1)],False)
-game.post_turn(game.players[1], False,2,3)
-
+game.turn(game.players[0],[(5,2)],True)
 print(game)
-
+game.turn(game.players[1],[bot.bot_turn()],False)
+print(game)
+game.turn(game.players[2],[(11,3),(2,1)],False)
+print(game)
+game.turn(game.players[3],[(11,3),(2,1)],False)
+print(game)
+game.turn(game.players[0],[(11,3),(2,1)],False)
+print(game)
+game.turn(game.players[1],[(11,3),(2,1)],False)
+print(game)
 
 
 # game.players[0].post_turn(True,1,3)

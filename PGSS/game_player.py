@@ -32,11 +32,12 @@ class Game():
     def set_prophet(self,new_prophet):
         self.prophet = new_prophet
     
-    def turn(self, card, valid): # allow multiple cards
+    def turn(self, player, card, valid): # allow multiple cards
             if(valid):
                 self.good_cards.extend(card)
             else:
                 self.bad_cards.extend(card)
+            self.post_turn(player, valid, len(card[-1]))
 
 
     def post_turn(self, player, valid, num_cards, prophet_decision = 3):
@@ -52,7 +53,7 @@ class Game():
         player.calculate_cards(valid,num_cards)
         for player in self.players:
             player.turn_points(self.most_cards())
-       
+
        #prophet points would clear if run after each turn?
         if self.prophet is not None:
             if(prophet_decision == 3):
@@ -78,14 +79,6 @@ class Player():
     def __init__(self):
         self.points = 0
         self.cards = 14
-        self.list_of_good_cards = []
-        self.list_of_bad_cards = []
-
-    def turn(self, card, valid): # allow multiple cards
-        if(valid):
-            self.list_of_good_cards.append(card)
-        else:
-            self.list_of_bad_cards.append(card)
 
 
     def update_prophet(self):
