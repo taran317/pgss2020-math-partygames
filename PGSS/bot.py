@@ -12,31 +12,31 @@ class Bot():
     # bad_cards = []
 
     #Remove the card 
-<<<<<<< HEAD
-    random.seed(7)
-=======
-
->>>>>>> 4a4e297afab7a45d56ea3a2c5c93f3a143b400f0
+    random.seed(6)
 
     def __init__(self):
         self.bot_cards = []
         self.good_cards = [(11,0),(11,1),(11,2),(11,3)]
         self.bad_cards = [(1,0),(2,0),(3,0),(4,0),(5,0),(6,1),(7,2),(8,3),(9,4),(10,5),(12,6)]
         #self.bot_cards = [(2,0),(10,0),(3,0)]
-<<<<<<< HEAD
         for i in range(14):
             self.bot_cards.extend([(random.randint(1,13),random.randint(0,3))])
-        weights = np.array([1,1,1,1,1,1,1])
-        criteria = np.array([1,1,1,1,1,1,1])
+        self.weight0 = .1
+        self.weight1 = .1
+        self.weight2 = .1
+        self.weight3 = .1
+        self.weight4 = .1
+        self.weight5 = .1
+        self.weight6 = .1
+        self.weight7 = .1
+        self.weight8 = .1
+        self.weight9 = .1
+        self.weight10 = .1
+        
+        self.weights = np.array([self.weight0,self.weight1,self.weight2,self.weight3,self.weight4,self.weight5,self.weight6,self.weight7,self.weight8,self.weight9,self.weight10],dtype=float)
+        self.criteria = np.array([0,0,0,0,0,0,0,0,0,0,0],dtype=float)
         # print(good_cards())
         # print(self.bot_cards)
-=======
-        for i in range(7):
-            self.bot_cards.extend([(random.randint(0,13),random.randint(0,3))])
-
-        # print(good_cards())
-        print(self.bot_cards)
->>>>>>> 4a4e297afab7a45d56ea3a2c5c93f3a143b400f0
         self.similarity_index = []
         
 
@@ -57,18 +57,12 @@ class Bot():
     def bot_turn(self,game):
         self.similarity_index = []
         self.update_cards(game)
+        self.update_weights(game)
         self.get_similarity_all()
-<<<<<<< HEAD
         print("THIS IS SIMILARITY INDEX")
         print(self.similarity_index)
 
         print("THESE ARE THE BOT CARDS")
-=======
-        print("THIS IS SiMILARITY INDEX")
-        print(self.similarity_index)
-
-        print("THESE ART BOt CARDS")
->>>>>>> 4a4e297afab7a45d56ea3a2c5c93f3a143b400f0
         print(self.bot_cards)
         # Returns the first card that has been played  if there has been one or finds the best card if there is none
         if 'pc' in self.similarity_index:
@@ -77,12 +71,12 @@ class Bot():
         # elif all(x <= 0 for x in similarity_index):
             # return 'no_similar_cards'
         # Checks for if all the similarity indexes are the same
-        elif self.same_similarity_index() == 'True':
-            # Chooses a random card to play
-            card_choice = random.randint(1, self.similarity_index.len())
-            card_played = self.bot_cards[card_choice]
-            self.bot_cards.pop(card_choice)
-            return card_played
+        # elif self.same_similarity_index() == 'True':
+        #     # Chooses a random card to play
+        #     card_choice = random.randint(1, self.similarity_index.len())
+        #     card_played = self.bot_cards[card_choice]
+        #     self.bot_cards.pop(card_choice)
+        #     return card_played
         else:
             best_card = self.determine_highest_similarity()
             self.bot_cards.remove(best_card)
@@ -108,7 +102,17 @@ class Bot():
         if (len(card_list)>0):
             return total/len(card_list)
        
-    def update_weights(self):
+    def update_weights(self, game):
+        if(game.recent_valid):
+            total = sum(self.weights[np.where(self.criteria == 1)] * .75)
+            self.weights[np.where(self.criteria == 0)] = self.weights[np.where(self.criteria == 0)] * .75
+            self.weights[np.where(self.criteria != 0)] = self.weights[np.where(self.criteria != 0)] * (total/len(np.where(self.criteria != 0)))
+        else:
+            total = sum(self.weights[np.where(self.criteria != 1)] * .75)
+            self.weights[np.where(self.criteria == 0)] = self.weights[np.where(self.criteria == 0)] * .75
+            self.weights[np.where(self.criteria != 0)] = self.weights[np.where(self.criteria != 0)] * (total/len(np.where(self.criteria != 0)))
+        print('num, suit, even, odd, div3, div4, div5, face, 1 apart, 2 apart, 3 apart')
+        print(self.weights)
 
     def get_similarity(self, card_1, card_2):
         number = 0
@@ -121,20 +125,28 @@ class Bot():
         (number2, suit2) = card_2
 
         if number1 == number2:
-            number = 1
+            self.criteria[0] = 1
         if suit1 == suit2:
-            suit = 1
+            self.criteria[1] = 1
         if (number1 % 2 == 0) and (number2 % 2 == 0):
-            even = 1
-        elif (number1 % 2 >= 1) and (number2 % 2 >= 1):
-            odd = 1
+            self.criteria[2] = 1
+        elif (number1 % 2 == 1) and (number2 % 2 == 1):
+            self.criteria[3] = 1
         if (number1 % 3 == 0) and (number2 % 3 == 0):
-            mult3 = 1
+            self.criteria[4] = 1
         if (number1 % 4 == 0) and (number2 % 4 == 0):
-            mult4 = 1
+            self.criteria[5] = 1
         if (number1 % 5 == 0) and (number2 % 5 == 0):
-            mult5 = 1
-        return (number * weight1 + suit * weight2 + even * weight3 + odd * weight4 + mult3 * weight5 + mult4 * weight6 + mult5 * weight7)
+            self.criteria[6] = 1
+        if number1 > 11 and number2 > 11:
+            self.criteria[7] = 1
+        if abs(number1 - number2) == 1:
+            self.criteria[8] = 1
+        if abs(number1 - number2) == 2:
+            self.criteria[9] = 1
+        if abs(number1 - number2) == 3:
+            self.criteria[10] = 1
+        return np.vdot(self.weights, self.criteria)
         
     def determine_highest_similarity(self):
         highest_similarity_number = 0
@@ -143,17 +155,17 @@ class Bot():
         return self.bot_cards[self.similarity_index.index(max(self.similarity_index))]
 
 
-    def same_similarity_index(self):
-        # Takes the first number to compare to
-        reference_number = self.similarity_index
-        # Checks for a number that is different
-        for number in self.similarity_index:
-            if not(number == reference_number):
-                # If there is a different similarity index
-                return False
-                break
-        # If all similarity indexes are the same
-        return True
+    # def same_similarity_index(self):
+    #     # Takes the first number to compare to
+    #     reference_number = self.similarity_index
+    #     # Checks for a number that is different
+    #     for number in self.similarity_index:
+    #         if not(number == reference_number):
+    #             # If there is a different similarity index
+    #             return False
+    #             break
+    #     # If all similarity indexes are the same
+    #     return True
     
     # def correct_cards():
     #     for number in self.similarity_index():

@@ -15,6 +15,7 @@ class Game():
         self.players = [player1,player2,player3,player4]
         self.good_cards = []
         self.bad_cards = []
+        self.recent_valid = None
 
         
     def __str__(self):
@@ -38,6 +39,7 @@ class Game():
         self.prophet = new_prophet
     
     def turn(self, player, card, valid): # allow multiple cards
+            self.recent_valid = valid
             if(valid):
                 self.good_cards.extend(card)
             else:
