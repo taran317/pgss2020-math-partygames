@@ -10,6 +10,8 @@ class Bot():
     # good_cards = []
     # bad_cards = []
 
+    #Remove the card 
+
 
     def __init__(self):
         self.bot_cards = []
@@ -39,8 +41,14 @@ class Bot():
         self.bot_cards = cards
         
     def bot_turn(self,game):
+        self.similarity_index = []
         self.update_cards(game)
         self.get_similarity_all()
+        print("THIS IS SiMILARITY INDEX")
+        print(self.similarity_index)
+
+        print("THESE ART BOt CARDS")
+        print(self.bot_cards)
         # Returns the first card that has been played  if there has been one or finds the best card if there is none
         if 'pc' in self.similarity_index:
             return self.similarity_index['pc']
@@ -50,10 +58,13 @@ class Bot():
         # Checks for if all the similarity indexes are the same
         elif self.same_similarity_index() == 'True':
             # Chooses a random card to play
-            card_choice = randint(1, self.similarity_index.len())
-            return bot_cards[card_choice]
+            card_choice = random.randint(1, self.similarity_index.len())
+            card_played = self.bot_cards[card_choice]
+            self.bot_cards.pop(card_choice)
+            return card_played
         else:
             best_card = self.determine_highest_similarity()
+            self.bot_cards.remove(best_card)
             return best_card
 
     def get_similarity_all(self): # game.good_cards, game.bad_cards
