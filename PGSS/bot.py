@@ -1,8 +1,10 @@
-from game_player import Game
-from game_player import Player
+# from game_player import Game
+# from game_player import Player
 import numpy as np
 import random
+
 class Bot():
+    # confidence_score = 50
     #create a list for similarities and one for differences
     #three levels: one card in hand, list of good cards and list of bad cards
     #Take in a list and compute similarities between card and list
@@ -16,8 +18,8 @@ class Bot():
 
     def __init__(self):
         self.bot_cards = []
-        self.good_cards = [(11,0),(11,1),(11,2),(11,3)]
-        self.bad_cards = [(1,0),(2,0),(3,0),(4,0),(5,0),(6,1),(7,2),(8,3),(9,4),(10,5),(12,6)]
+        self.good_cards = []
+        self.bad_cards = []
         #self.bot_cards = [(2,0),(10,0),(3,0)]
         for i in range(14):
             self.bot_cards.extend([(random.randint(1,13),random.randint(0,3))])
@@ -32,6 +34,8 @@ class Bot():
         self.weight8 = .1
         self.weight9 = .1
         self.weight10 = .1
+
+        self.recent_valid = None
         
         self.weights = np.array([self.weight0,self.weight1,self.weight2,self.weight3,self.weight4,self.weight5,self.weight6,self.weight7,self.weight8,self.weight9,self.weight10],dtype=float)
         self.criteria = np.array([0,0,0,0,0,0,0,0,0,0,0],dtype=float)
@@ -39,25 +43,29 @@ class Bot():
         # print(self.bot_cards)
         self.similarity_index = []
         
+    def update_valid(self,valid):
+        self.recent_valid = valid
 
-    # def get_good_cards(self,game):
-    #     return game.good_cards
+    def get_good_cards(self):
+        return self.good_cards
+    def get_bad_cards(self):
+        return self.bad_cards
     
-    # def get_bad_cards(self,game):
-    #     return game.bad_cards
+    def update_good_cards(self,card):
+        self.good_cards.extend(card)
+    def update_bad_cards(self,card):
+        self.bad_cards.extend(card)
     
-    def update_cards(self,game):
-        self.good_cards = game.good_cards
-        self.bad_cards = game.bad_cards
 
     #Remember to differentiate between face cards (J = 11, Q =12, K =13, A = 14)
     def determine_bot_cards(cards):
         self.bot_cards = cards
         
-    def bot_turn(self,game):
+    def bot_turn(self):
         self.similarity_index = []
-        self.update_cards(game)
-        self.update_weights(game)
+        # self.update_good_cards(game) #probably wrong
+        # self.update_bad_cards(game)
+        self.update_weights()
         self.get_similarity_all()
         print("THIS IS SIMILARITY INDEX")
         print(self.similarity_index)
@@ -102,8 +110,8 @@ class Bot():
         if (len(card_list)>0):
             return total/len(card_list)
        
-    def update_weights(self, game):
-        if(game.recent_valid):
+    def update_weights(self):
+        if(self.recent_valid):
             total = sum(self.weights[np.where(self.criteria == 1)] * .75)
             self.weights[np.where(self.criteria == 0)] = self.weights[np.where(self.criteria == 0)] * .75
             self.weights[np.where(self.criteria != 0)] = self.weights[np.where(self.criteria != 0)] * (total/len(np.where(self.criteria != 0)))
@@ -154,6 +162,8 @@ class Bot():
         
         return self.bot_cards[self.similarity_index.index(max(self.similarity_index))]
 
+    # def calculate_confidence():
+    #     if 
 
     # def same_similarity_index(self):
     #     # Takes the first number to compare to
@@ -170,5 +180,3 @@ class Bot():
     # def correct_cards():
     #     for number in self.similarity_index():
     #         if 
-
-    # def calculate_confidence(Game.current_board):

@@ -1,3 +1,5 @@
+from bot import Bot
+
 class Game():
     prophet = None
     prophet_decision = 3
@@ -12,10 +14,9 @@ class Game():
         player2 = Player()
         player3 = Player()
         player4 = Player() 
+        self.bot = Bot()
+
         self.players = [player1,player2,player3,player4]
-        self.good_cards = []
-        self.bad_cards = []
-        self.recent_valid = None
 
         
     def __str__(self):
@@ -24,13 +25,13 @@ class Game():
         for num in self.players:
             output += "Player "+ str(i) + " :\tCards: "+ str(num.get_cards())+ "\tPoints: "+ str(num.get_points()) + "\n"
             i += 1
-        output += 'Good Cards: ' + str(self.good_cards) + '\nBad Cards: ' + str(self.bad_cards) + '\n'
+        output += 'Good Cards: ' + str(self.bot.get_good_cards()) + '\nBad Cards: ' + str(self.bot.get_bad_cards()) + '\n'
         return(output)
     
-    def good_cards(self):
-        return self.good_cards
-    def bad_cards(self):
-        return self.bad_cards
+    # def good_cards(self):
+    #     return self.good_cards
+    # def bad_cards(self):
+    #     return self.bad_cards
 
     def update_current_board(self,new_cards): #Gets the new cards from the server and upates them to the board
         self.current_board += new_cards
@@ -39,11 +40,11 @@ class Game():
         self.prophet = new_prophet
     
     def turn(self, player, card, valid): # allow multiple cards
-            self.recent_valid = valid
+            self.bot.update_valid(valid)
             if(valid):
-                self.good_cards.extend(card)
+                self.bot.update_good_cards(card)
             else:
-                self.bad_cards.extend(card)
+                self.bot.update_bad_cards(card)
             self.post_turn(player, valid, len(card))
 
 

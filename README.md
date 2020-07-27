@@ -2,6 +2,7 @@
 
 # AGENDA for Monday July 27, 2020
 ## Integrate different weighting system for factors of cards (suit, number, even, odd)
+- Confidence score
 ## Meeting Schedule:
 ## - Morning Session: 8:00 AM - 12:00 PM
 ## - Lunch: 12:00 PM - 2:00 PM

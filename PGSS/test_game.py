@@ -2,7 +2,7 @@ import eleusis_client
 from eleusis_client import ApiClient
 from game_player import Game
 from game_player import Player
-from bot import Bot
+# from bot import Bot
 
 # Things to Include in our Test Game
 # People playing cards correctly
@@ -12,28 +12,31 @@ from bot import Bot
 # Not becoming prophet and losing points
 # CHIPS?!?!?!
 
-client = ApiClient("https://cheatcardgame.com")
-client.login('Tarzan','PGSS')
-# pregame = client.create_game(False)
-pregame = client.get_game_by_id('41a3c2fc-cce4-45c3-9a69-63e67a69e8a2')
-# client.add_oracle_bot(pregame.game_id)
-pregame = client.add_player_bot(pregame.game_id)
-print(pregame)
+# client = ApiClient("https://cheatcardgame.com")
+# client.login('Tarzan','PGSS')
+# # pregame = client.create_game(False)
+# pregame = client.get_game_by_id('41a3c2fc-cce4-45c3-9a69-63e67a69e8a2')
+# # client.add_oracle_bot(pregame.game_id)
+# pregame = client.add_player_bot(pregame.game_id)
+# print(pregame)
 
 
 game = Game()
 player = Player()
-bot0 = Bot()
-bot1 = Bot()
-bot2 = Bot()
-bot3 = Bot()
+# bot0 = Bot()
+# bot1 = Bot()
+# bot2 = Bot()
+# bot3 = Bot()
 
-# print(bot.update_cards(game))
-# game.get_good_cards()
-# print("\n\n\n\n\n\n====================================================================\n\n\n\n\n\n")
-# print("NEW ROUND\n")
-# game.turn(game.players[0],[bot0.bot_turn(game)],False)
-# print(game)
+game.bot.update_good_cards([(1,2)])
+print(game.bot.get_good_cards())
+print("\n\n\n\n\n\n====================================================================\n\n\n\n\n\n")
+print("NEW ROUND\n")
+game.turn(game.players[0],[game.bot.bot_turn()],False)
+print(game)
+game.turn(game.players[1],[game.bot.bot_turn()],False)
+print(game)
+
 # game.turn(game.players[1],[bot1.bot_turn(game)],False)
 # print(game)
 # game.turn(game.players[2],[bot2.bot_turn(game)],True)
