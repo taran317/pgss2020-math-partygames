@@ -12,19 +12,31 @@ class Bot():
     # bad_cards = []
 
     #Remove the card 
+<<<<<<< HEAD
     random.seed(7)
+=======
+
+>>>>>>> 4a4e297afab7a45d56ea3a2c5c93f3a143b400f0
 
     def __init__(self):
         self.bot_cards = []
         self.good_cards = [(11,0),(11,1),(11,2),(11,3)]
         self.bad_cards = [(1,0),(2,0),(3,0),(4,0),(5,0),(6,1),(7,2),(8,3),(9,4),(10,5),(12,6)]
         #self.bot_cards = [(2,0),(10,0),(3,0)]
+<<<<<<< HEAD
         for i in range(14):
             self.bot_cards.extend([(random.randint(1,13),random.randint(0,3))])
         weights = np.array([1,1,1,1,1,1,1])
         criteria = np.array([1,1,1,1,1,1,1])
         # print(good_cards())
         # print(self.bot_cards)
+=======
+        for i in range(7):
+            self.bot_cards.extend([(random.randint(0,13),random.randint(0,3))])
+
+        # print(good_cards())
+        print(self.bot_cards)
+>>>>>>> 4a4e297afab7a45d56ea3a2c5c93f3a143b400f0
         self.similarity_index = []
         
 
@@ -46,10 +58,17 @@ class Bot():
         self.similarity_index = []
         self.update_cards(game)
         self.get_similarity_all()
+<<<<<<< HEAD
         print("THIS IS SIMILARITY INDEX")
         print(self.similarity_index)
 
         print("THESE ARE THE BOT CARDS")
+=======
+        print("THIS IS SiMILARITY INDEX")
+        print(self.similarity_index)
+
+        print("THESE ART BOt CARDS")
+>>>>>>> 4a4e297afab7a45d56ea3a2c5c93f3a143b400f0
         print(self.bot_cards)
         # Returns the first card that has been played  if there has been one or finds the best card if there is none
         if 'pc' in self.similarity_index:
