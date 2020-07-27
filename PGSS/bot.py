@@ -12,11 +12,15 @@ class Bot():
 
 
     def __init__(self):
+        self.bot_cards = []
         self.good_cards = [(11,0),(11,1),(11,2),(11,3)]
         self.bad_cards = [(1,0),(2,0),(3,0),(4,0),(5,0),(6,1),(7,2),(8,3),(9,4),(10,5),(12,6)]
-        self.bot_cards = [(2,0),(10,0),(3,0)]
+        #self.bot_cards = [(2,0),(10,0),(3,0)]
+        for i in range(7):
+            self.bot_cards.extend([(random.randint(0,13),random.randint(0,3))])
 
         # print(good_cards())
+        print(self.bot_cards)
         self.similarity_index = []
         
 
