@@ -1,5 +1,6 @@
 from game_player import Game
 from game_player import Player
+import numpy as np
 import random
 class Bot():
     #create a list for similarities and one for differences
@@ -10,13 +11,20 @@ class Bot():
     # good_cards = []
     # bad_cards = []
 
+    #Remove the card 
+    random.seed(7)
 
     def __init__(self):
+        self.bot_cards = []
         self.good_cards = [(11,0),(11,1),(11,2),(11,3)]
         self.bad_cards = [(1,0),(2,0),(3,0),(4,0),(5,0),(6,1),(7,2),(8,3),(9,4),(10,5),(12,6)]
-        self.bot_cards = [(2,0),(10,0),(3,0)]
-
+        #self.bot_cards = [(2,0),(10,0),(3,0)]
+        for i in range(14):
+            self.bot_cards.extend([(random.randint(1,13),random.randint(0,3))])
+        weights = np.array([1,1,1,1,1,1,1])
+        criteria = np.array([1,1,1,1,1,1,1])
         # print(good_cards())
+        # print(self.bot_cards)
         self.similarity_index = []
         
 
@@ -35,8 +43,14 @@ class Bot():
         self.bot_cards = cards
         
     def bot_turn(self,game):
+        self.similarity_index = []
         self.update_cards(game)
         self.get_similarity_all()
+        print("THIS IS SIMILARITY INDEX")
+        print(self.similarity_index)
+
+        print("THESE ARE THE BOT CARDS")
+        print(self.bot_cards)
         # Returns the first card that has been played  if there has been one or finds the best card if there is none
         if 'pc' in self.similarity_index:
             return self.similarity_index['pc']
@@ -46,10 +60,13 @@ class Bot():
         # Checks for if all the similarity indexes are the same
         elif self.same_similarity_index() == 'True':
             # Chooses a random card to play
-            card_choice = randint(1, self.similarity_index.len())
-            return bot_cards[card_choice]
+            card_choice = random.randint(1, self.similarity_index.len())
+            card_played = self.bot_cards[card_choice]
+            self.bot_cards.pop(card_choice)
+            return card_played
         else:
             best_card = self.determine_highest_similarity()
+            self.bot_cards.remove(best_card)
             return best_card
 
     def get_similarity_all(self): # game.good_cards, game.bad_cards
@@ -72,13 +89,15 @@ class Bot():
         if (len(card_list)>0):
             return total/len(card_list)
        
-    
+    def update_weights(self):
+
     def get_similarity(self, card_1, card_2):
         number = 0
         suit = 0
         even = 0
         odd = 0
        
+        # all cards that are not face cards, color, 
         (number1, suit1) = card_1
         (number2, suit2) = card_2
 
@@ -90,7 +109,13 @@ class Bot():
             even = 1
         elif (number1 % 2 >= 1) and (number2 % 2 >= 1):
             odd = 1
-        return (number*2 + suit*3 + even + odd)
+        if (number1 % 3 == 0) and (number2 % 3 == 0):
+            mult3 = 1
+        if (number1 % 4 == 0) and (number2 % 4 == 0):
+            mult4 = 1
+        if (number1 % 5 == 0) and (number2 % 5 == 0):
+            mult5 = 1
+        return (number * weight1 + suit * weight2 + even * weight3 + odd * weight4 + mult3 * weight5 + mult4 * weight6 + mult5 * weight7)
         
     def determine_highest_similarity(self):
         highest_similarity_number = 0

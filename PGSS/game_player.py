@@ -23,7 +23,7 @@ class Game():
         for num in self.players:
             output += "Player "+ str(i) + " :\tCards: "+ str(num.get_cards())+ "\tPoints: "+ str(num.get_points()) + "\n"
             i += 1
-        output += 'Good Cards: ' + str(self.good_cards) + '\nBad Cards: ' + str(self.bad_cards)
+        output += 'Good Cards: ' + str(self.good_cards) + '\nBad Cards: ' + str(self.bad_cards) + '\n'
         return(output)
     
     def good_cards(self):
