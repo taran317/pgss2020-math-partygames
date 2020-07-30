@@ -22,7 +22,7 @@ class Bot():
         self.bad_cards = []
         #self.bot_cards = [(2,0),(10,0),(3,0)]
         for i in range(14):
-            self.bot_cards.extend([(random.randint(1,13),random.randint(0,3))])
+            self.bot_cards.extend([(random.randint(1,13),random.randint(1,4))])
         self.weight0 = .1
         self.weight1 = .1
         self.weight2 = .1
@@ -111,14 +111,18 @@ class Bot():
             return total/len(card_list)
        
     def update_weights(self):
-        if(self.recent_valid):
-            total = sum(self.weights[np.where(self.criteria == 1)] * .75)
-            self.weights[np.where(self.criteria == 0)] = self.weights[np.where(self.criteria == 0)] * .75
-            self.weights[np.where(self.criteria != 0)] = self.weights[np.where(self.criteria != 0)] * (total/len(np.where(self.criteria != 0)))
-        else:
-            total = sum(self.weights[np.where(self.criteria != 1)] * .75)
-            self.weights[np.where(self.criteria == 0)] = self.weights[np.where(self.criteria == 0)] * .75
-            self.weights[np.where(self.criteria != 0)] = self.weights[np.where(self.criteria != 0)] * (total/len(np.where(self.criteria != 0)))
+        print("updatinggggggggggggggggg")
+        if 1 in self.criteria:
+            if(self.recent_valid):
+                total = sum(self.weights[np.where(self.criteria == 0)] * .25)
+                print('where:      ',np.where(self.criteria == 0),np.where(self.criteria == 1),total,len(np.where(self.criteria == 1)[0]))
+                self.weights[np.where(self.criteria == 0)] *= .75
+                self.weights[np.where(self.criteria == 1)] += (total/len(np.where(self.criteria == 1)[0]))
+            else:
+                total = sum(self.weights[np.where(self.criteria == 0)] * .25)
+                print('where:      ',np.where(self.criteria == 0),np.where(self.criteria == 1),total,len(np.where(self.criteria == 1)[0]))
+                self.weights[np.where(self.criteria == 0)] *= 1.4
+                self.weights[np.where(self.criteria == 1)] -= (total/len(np.where(self.criteria == 1)[0]))
         print('num, suit, even, odd, div3, div4, div5, face, 1 apart, 2 apart, 3 apart')
         print(self.weights)
 
