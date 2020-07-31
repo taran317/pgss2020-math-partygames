@@ -19,7 +19,7 @@ data_train, data_test, label_train, label_test = train_test_split(train_data, tr
 print(train_labels)
 model = keras.Sequential([
     keras.layers.Dense(1092),
-    keras.layers.Dense(2000, activation='relu'), # 728
+    keras.layers.Dense(2000, activation='softmax'), # 728
     keras.layers.Dense(6)
 ])
 
@@ -42,7 +42,7 @@ print(predictions.shape,label_test.shape)
 df = pd.crosstab(predictions,label_test) # .apply(lambda r: round(r/r.sum()*100,2), axis=1)
 print(df)
 df.columns = ['Even','Odd','Red','Black','Prime','Red & Even']
-df.index = ['   Even','   Odd','   Red','   Black','   Prime','   Red & Even']
+df.index = ['Even','Odd','Red','Black','Prime','Red & Even']
 sns.heatmap(df, cmap='coolwarm', linewidths=0.5, annot=True)
 # sns.palplot(sns.light_palette("navy", reverse=True))
 # sns.palplot(sns.color_palette("husl", 8))
