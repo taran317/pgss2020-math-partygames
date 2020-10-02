@@ -111,7 +111,6 @@ class Bot():
             return total/len(card_list)
        
     def update_weights(self):
-        print("updatinggggggggggggggggg")
         if 1 in self.criteria:
             if(self.recent_valid):
                 total = sum(self.weights[np.where(self.criteria == 0)] * .25)
